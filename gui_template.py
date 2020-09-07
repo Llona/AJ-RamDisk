@@ -25,8 +25,8 @@ class main_frame ( wx.Frame ):
 
 		sbSizer8 = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, u"label" ), wx.VERTICAL )
 
-		self.ramdrive_listCtrl = wx.ListCtrl( sbSizer8.GetStaticBox(), wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LC_HRULES|wx.LC_REPORT|wx.LC_VRULES )
-		sbSizer8.Add( self.ramdrive_listCtrl, 1, wx.ALL|wx.EXPAND, 5 )
+		self.ramdrive_listctrl = wx.ListCtrl( sbSizer8.GetStaticBox(), wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LC_HRULES|wx.LC_REPORT|wx.LC_VRULES )
+		sbSizer8.Add( self.ramdrive_listctrl, 1, wx.ALL|wx.EXPAND, 5 )
 
 
 		bSizer30.Add( sbSizer8, 1, wx.ALL|wx.EXPAND, 5 )
@@ -99,13 +99,13 @@ class AddEditDiskFrame ( wx.Frame ):
 
 		bSizer36.Add( self.m_staticText17, 0, wx.LEFT|wx.RIGHT|wx.TOP, 7 )
 
-		self.m_textCtrl11 = wx.TextCtrl( sbSizer9.GetStaticBox(), wx.ID_ANY, u"1", wx.DefaultPosition, wx.DefaultSize, wx.TE_RIGHT )
-		bSizer36.Add( self.m_textCtrl11, 0, wx.ALL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+		self.size_text = wx.TextCtrl( sbSizer9.GetStaticBox(), wx.ID_ANY, u"1", wx.DefaultPosition, wx.DefaultSize, wx.TE_RIGHT )
+		bSizer36.Add( self.size_text, 0, wx.ALL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
 
-		m_choice6Choices = [ u"MB", u"GB" ]
-		self.m_choice6 = wx.Choice( sbSizer9.GetStaticBox(), wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice6Choices, 0 )
-		self.m_choice6.SetSelection( 1 )
-		bSizer36.Add( self.m_choice6, 0, wx.ALL, 5 )
+		size_unit_choiceChoices = [ u"MB", u"GB" ]
+		self.size_unit_choice = wx.Choice( sbSizer9.GetStaticBox(), wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, size_unit_choiceChoices, 0 )
+		self.size_unit_choice.SetSelection( 1 )
+		bSizer36.Add( self.size_unit_choice, 0, wx.ALL, 5 )
 
 
 		bSizer35.Add( bSizer36, 0, wx.EXPAND, 5 )
@@ -117,10 +117,10 @@ class AddEditDiskFrame ( wx.Frame ):
 
 		bSizer37.Add( self.m_staticText18, 0, wx.LEFT|wx.RIGHT|wx.TOP, 7 )
 
-		m_choice7Choices = []
-		self.m_choice7 = wx.Choice( sbSizer9.GetStaticBox(), wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice7Choices, 0 )
-		self.m_choice7.SetSelection( 0 )
-		bSizer37.Add( self.m_choice7, 0, wx.ALL, 5 )
+		driver_choiceChoices = []
+		self.driver_choice = wx.Choice( sbSizer9.GetStaticBox(), wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, driver_choiceChoices, 0 )
+		self.driver_choice.SetSelection( 0 )
+		bSizer37.Add( self.driver_choice, 0, wx.ALL, 5 )
 
 
 		bSizer35.Add( bSizer37, 0, wx.EXPAND, 5 )
@@ -132,16 +132,16 @@ class AddEditDiskFrame ( wx.Frame ):
 
 		bSizer371.Add( self.m_staticText181, 0, wx.LEFT|wx.RIGHT|wx.TOP, 7 )
 
-		self.m_textCtrl12 = wx.TextCtrl( sbSizer9.GetStaticBox(), wx.ID_ANY, u"RamDisk", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer371.Add( self.m_textCtrl12, 0, wx.ALL, 5 )
+		self.label_text = wx.TextCtrl( sbSizer9.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer371.Add( self.label_text, 0, wx.ALL, 5 )
 
 
 		bSizer35.Add( bSizer371, 0, wx.EXPAND, 5 )
 
 		bSizer3711 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.m_checkBox3 = wx.CheckBox( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Store to HDD?", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer3711.Add( self.m_checkBox3, 0, wx.ALL|wx.ALIGN_BOTTOM, 5 )
+		self.store_img_checkbox = wx.CheckBox( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Store to HDD?", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer3711.Add( self.store_img_checkbox, 0, wx.ALL|wx.ALIGN_BOTTOM, 5 )
 
 
 		bSizer35.Add( bSizer3711, 1, wx.EXPAND, 5 )
@@ -151,27 +151,28 @@ class AddEditDiskFrame ( wx.Frame ):
 
 		bSizer37111 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.m_checkBox31 = wx.CheckBox( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Store All?", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer37111.Add( self.m_checkBox31, 0, wx.ALIGN_CENTER|wx.LEFT, 5 )
+		self.store_all_checkbox = wx.CheckBox( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Store All?", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.store_all_checkbox.SetValue(True)
+		bSizer37111.Add( self.store_all_checkbox, 0, wx.ALIGN_CENTER|wx.LEFT, 5 )
 
-		self.m_button23 = wx.Button( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Choise Folder", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer37111.Add( self.m_button23, 0, wx.ALL, 5 )
+		self.choice_folder_button = wx.Button( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Choise Folder", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer37111.Add( self.choice_folder_button, 0, wx.ALL, 5 )
 
 
 		bSizer35.Add( bSizer37111, 0, wx.EXPAND, 5 )
 
 		bSizer61 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.m_staticText27 = wx.StaticText( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Patch:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText27 = wx.StaticText( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Path:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText27.Wrap( -1 )
 
 		bSizer61.Add( self.m_staticText27, 0, wx.LEFT|wx.RIGHT|wx.TOP, 5 )
 
-		self.m_textCtrl19 = wx.TextCtrl( sbSizer9.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer61.Add( self.m_textCtrl19, 1, wx.ALL, 5 )
+		self.img_path_text = wx.TextCtrl( sbSizer9.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer61.Add( self.img_path_text, 1, wx.ALL, 5 )
 
-		self.m_button30 = wx.Button( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Path", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer61.Add( self.m_button30, 0, wx.ALL, 5 )
+		self.choice_path_button = wx.Button( sbSizer9.GetStaticBox(), wx.ID_ANY, u"Path", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer61.Add( self.choice_path_button, 0, wx.ALL, 5 )
 
 
 		bSizer35.Add( bSizer61, 0, wx.EXPAND, 5 )
@@ -202,8 +203,28 @@ class AddEditDiskFrame ( wx.Frame ):
 
 		self.Centre( wx.BOTH )
 
+		# Connect Events
+		self.store_img_checkbox.Bind( wx.EVT_CHECKBOX, self.check_store_img )
+		self.store_all_checkbox.Bind( wx.EVT_CHECKBOX, self.check_store_all )
+		self.m_button20.Bind( wx.EVT_BUTTON, self.press_ok )
+		self.m_button22.Bind( wx.EVT_BUTTON, self.press_cancel )
+
 	def __del__( self ):
 		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def check_store_img( self, event ):
+		event.Skip()
+
+	def check_store_all( self, event ):
+		event.Skip()
+
+	def press_ok( self, event ):
+		event.Skip()
+
+	def press_cancel( self, event ):
+		event.Skip()
 
 
 ###########################################################################
@@ -242,8 +263,9 @@ class SelectFolderFrame ( wx.Frame ):
 
 		bSizer59 = wx.BoxSizer( wx.VERTICAL )
 
-		self.m_textCtrl18 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer59.Add( self.m_textCtrl18, 1, wx.ALL|wx.EXPAND, 5 )
+		m_listBox1Choices = []
+		self.m_listBox1 = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listBox1Choices, 0 )
+		bSizer59.Add( self.m_listBox1, 1, wx.ALL|wx.EXPAND, 5 )
 
 
 		bSizer55.Add( bSizer59, 1, wx.EXPAND, 5 )
